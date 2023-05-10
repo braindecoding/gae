@@ -21,10 +21,10 @@ digraph fullGraph {
 	Node_0xc00016fce0:Node_0xc00016fce0:anchor->Node_0xc00016fc00:Node_0xc00016fc00:anchor[ labelfloat=false, taillabel=" 0 " ];
 	Node_0xc00016fdc0:Node_0xc00016fdc0:anchor->Node_0xc00016fc00:Node_0xc00016fc00:anchor[ labelfloat=false, taillabel=" 0 " ];
 	Node_0xc00016fea0:Node_0xc00016fea0:anchor->Node_0xc00016fc00:Node_0xc00016fc00:anchor[ labelfloat=false, taillabel=" 0 " ];
-	Node_0xc01a686000:Node_0xc01a686000:anchor->Node_0xc00016fdc0:Node_0xc00016fdc0:anchor[ labelfloat=false, taillabel=" 0 " ];
-	Node_0xc01a686000:Node_0xc01a686000:anchor->Node_0xc00016fea0:Node_0xc00016fea0:anchor[ labelfloat=false, taillabel=" 1 " ];
-	Node_0xc01a6860e0:Node_0xc01a6860e0:anchor->Node_0xc00016fce0:Node_0xc00016fce0:anchor[ labelfloat=false, taillabel=" 0 " ];
-	Node_0xc01a6860e0:Node_0xc01a6860e0:anchor->Node_0xc01a686000:Node_0xc01a686000:anchor[ labelfloat=false, taillabel=" 1 " ];
+	Node_0xc01a67c000:Node_0xc01a67c000:anchor->Node_0xc00016fdc0:Node_0xc00016fdc0:anchor[ labelfloat=false, taillabel=" 0 " ];
+	Node_0xc01a67c000:Node_0xc01a67c000:anchor->Node_0xc00016fea0:Node_0xc00016fea0:anchor[ labelfloat=false, taillabel=" 1 " ];
+	Node_0xc01a67c0e0:Node_0xc01a67c0e0:anchor->Node_0xc00016fce0:Node_0xc00016fce0:anchor[ labelfloat=false, taillabel=" 0 " ];
+	Node_0xc01a67c0e0:Node_0xc01a67c0e0:anchor->Node_0xc01a67c000:Node_0xc01a67c000:anchor[ labelfloat=false, taillabel=" 1 " ];
 	outsideRoot->insideInputs[ constraint=false, style=invis, weight=999 ];
 	outsideExprG->insideExprG[ constraint=false, style=invis, weight=999 ];
 	outsideRoot->outsideExprG[ constraint=false, style=invis, weight=999 ];
@@ -138,7 +138,7 @@ digraph fullGraph {
 	Node_0xc00016fa40 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#FF0000;"  BGCOLOR="lightblue">
 
-<TR><TD>e</TD><TD>read sigmoid(%c) :: Matrix float64 into 0xc0001dc430 :: NIL</TD></TR>
+<TR><TD>e</TD><TD>read sigmoid(%c) :: Matrix float64 into 0xc0001de430 :: NIL</TD></TR>
 
 
 <TR><TD>Overwrites Input 0</TD><TD>Data On: CPU</TD></TR>
@@ -213,7 +213,7 @@ digraph fullGraph {
 
 </TABLE>
 >, shape=none ];
-	Node_0xc01a686000 [ fontname=monospace, label=<
+	Node_0xc01a67c000 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor" >
 
 <TR><TD>14</TD><TD>⊙ false(%12, %13) :: float64</TD></TR>
@@ -226,7 +226,7 @@ digraph fullGraph {
 
 </TABLE>
 >, shape=none ];
-	Node_0xc01a6860e0 [ fontname=monospace, label=<
+	Node_0xc01a67c0e0 [ fontname=monospace, label=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" PORT="anchor"  COLOR="#FF0000;" >
 
 <TR><TD>15</TD><TD>÷ false(%11, %14) :: float64</TD></TR>
@@ -281,7 +281,7 @@ digraph fullGraph {
 <TR><TD>Shape</TD><TD>(784, 128)</TD></TR>
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 
-<TR><TD>Value</TD><TD>Matrix (784, 128) [128 1]<BR />⎡    0.046     0.0105  ⋯    0.0273   -0.00742⎤<BR />⎢   0.0203     0.0787  ⋯   -0.0341     -0.058⎥<BR />  ⋮  <BR />⎢  -0.0601   -0.00197  ⋯  -0.00866    -0.0531⎥<BR />⎣   0.0559     0.0721  ⋯   0.00512     0.0314⎦<BR /></TD></TR>
+<TR><TD>Value</TD><TD>Matrix (784, 128) [128 1]<BR />⎡     0.03     0.0455  ⋯   -0.0129    -0.0253⎤<BR />⎢  0.00057    0.00636  ⋯    -0.079    -0.0792⎥<BR />  ⋮  <BR />⎢  -0.0389     0.0776  ⋯   -0.0645     -0.024⎥<BR />⎣  -0.0761   -0.00733  ⋯    0.0473     0.0233⎦<BR /></TD></TR>
 
 
 </TABLE>
@@ -294,7 +294,7 @@ digraph fullGraph {
 <TR><TD>Shape</TD><TD>(128, 64)</TD></TR>
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 
-<TR><TD>Value</TD><TD>Matrix (128, 64) [64 1]<BR />⎡    0.157  -0.000438  ⋯   -0.0448     0.0727⎤<BR />⎢   0.0472      0.119  ⋯    -0.104      0.113⎥<BR />  ⋮  <BR />⎢   0.0878      0.138  ⋯    0.0879      0.113⎥<BR />⎣   -0.149    -0.0194  ⋯     0.141    -0.0574⎦<BR /></TD></TR>
+<TR><TD>Value</TD><TD>Matrix (128, 64) [64 1]<BR />⎡   -0.064     -0.065  ⋯   -0.0953    -0.0771⎤<BR />⎢  0.00424     -0.119  ⋯   -0.0267      0.149⎥<BR />  ⋮  <BR />⎢  -0.0996     -0.117  ⋯     0.123      0.125⎥<BR />⎣    0.126      0.152  ⋯    0.0618      0.136⎦<BR /></TD></TR>
 
 
 </TABLE>
@@ -307,7 +307,7 @@ digraph fullGraph {
 <TR><TD>Shape</TD><TD>(64, 128)</TD></TR>
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 
-<TR><TD>Value</TD><TD>Matrix (64, 128) [128 1]<BR />⎡    0.157  -0.000438  ⋯    -0.104      0.113⎤<BR />⎢   -0.166     -0.102  ⋯    0.0531     0.0992⎥<BR />  ⋮  <BR />⎢   -0.128    -0.0241  ⋯     -0.09    -0.0216⎥<BR />⎣   0.0878      0.138  ⋯     0.141    -0.0574⎦<BR /></TD></TR>
+<TR><TD>Value</TD><TD>Matrix (64, 128) [128 1]<BR />⎡   -0.064     -0.065  ⋯   -0.0267      0.149⎤<BR />⎢    0.036      0.158  ⋯    -0.142    -0.0459⎥<BR />  ⋮  <BR />⎢   -0.175       0.16  ⋯   -0.0851    -0.0143⎥<BR />⎣  -0.0996     -0.117  ⋯    0.0618      0.136⎦<BR /></TD></TR>
 
 
 </TABLE>
@@ -320,7 +320,7 @@ digraph fullGraph {
 <TR><TD>Shape</TD><TD>(128, 784)</TD></TR>
 <TR><TD>Overwrites Input -1</TD><TD>Data On: CPU</TD></TR>
 
-<TR><TD>Value</TD><TD>Matrix (128, 784) [784 1]<BR />⎡   0.0628     0.0191  ⋯   -0.0747    -0.0808⎤<BR />⎢  -0.0408    -0.0363  ⋯   -0.0662     0.0208⎥<BR />  ⋮  <BR />⎢  0.00854     0.0431  ⋯   -0.0607     0.0472⎥<BR />⎣   0.0542    -0.0435  ⋯    0.0746    -0.0227⎦<BR /></TD></TR>
+<TR><TD>Value</TD><TD>Matrix (128, 784) [784 1]<BR />⎡  -0.0294    -0.0298  ⋯    -0.053    -0.0568⎤<BR />⎢   0.0756    -0.0341  ⋯   -0.0698    0.00758⎥<BR />  ⋮  <BR />⎢   0.0145     0.0135  ⋯    0.0795     0.0798⎥<BR />⎣  -0.0204     0.0657  ⋯    0.0677     0.0734⎦<BR /></TD></TR>
 
 
 </TABLE>
