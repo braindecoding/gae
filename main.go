@@ -36,6 +36,7 @@ func main() {
 	}
 
 	numExamples := inputs.Shape()[0]
+	fmt.Println(inputs.Shape()) //60000*784
 	bs := *batchsize
 
 	// MNIST data consists of 28 by 28 black and white images
@@ -160,6 +161,7 @@ func main() {
 	}
 
 	numExamples = inputs.Shape()[0]
+	fmt.Println(inputs.Shape()) //10000*784
 	bs = *batchsize
 	batches = numExamples / bs
 
