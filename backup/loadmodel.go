@@ -1,4 +1,4 @@
-package gae
+package main
 
 import (
 	"encoding/gob"
@@ -8,7 +8,6 @@ import (
 	"image/jpeg"
 	"log"
 	"math"
-	"math/rand"
 	"os"
 	"time"
 
@@ -21,11 +20,11 @@ import (
 )
 
 var (
-	epochs     = flag.Int("epochs", 5, "Number of epochs to train for")
-	dataset    = flag.String("dataset", "train", "Which dataset to train on? Valid options are \"train\" or \"test\"")
-	dtype      = flag.String("dtype", "float64", "Which dtype to use")
-	batchsize  = flag.Int("batchsize", 100, "Batch size")
-	cpuprofile = flag.String("cpuprofile", "", "CPU profiling")
+	//epochs     = flag.Int("epochs", 5, "Number of epochs to train for")
+	//dataset   = flag.String("dataset", "train", "Which dataset to train on? Valid options are \"train\" or \"test\"")
+	dtype     = flag.String("dtype", "float64", "Which dtype to use")
+	batchsize = flag.Int("batchsize", 100, "Batch size")
+	//cpuprofile = flag.String("cpuprofile", "", "CPU profiling")
 )
 
 const loc = "./mnist/"
@@ -85,10 +84,6 @@ func newNN(g *gorgonia.ExprGraph) *nn {
 		w2: w2,
 		w3: w3,
 	}
-}
-
-func (m *nn) learnables() gorgonia.Nodes {
-	return gorgonia.Nodes{m.w0, m.w1, m.w2, m.w3}
 }
 
 func (m *nn) fwd(x *gorgonia.Node) (err error) {
@@ -155,7 +150,6 @@ func visualizeRow(x []float64) *image.Gray {
 func main() {
 	flag.Parse()
 	parseDtype()
-	rand.Seed(7945)
 
 	// // intercept Ctrl+C
 	// sigChan := make(chan os.Signal, 1)
@@ -166,12 +160,12 @@ func main() {
 	var err error
 
 	// load our data set
-	trainOn := *dataset
-	if inputs, _, err = mnist.Load(trainOn, loc, dt); err != nil {
-		log.Fatal(err)
-	}
+	//trainOn := *dataset
+	//if inputs, _, err = mnist.Load(trainOn, loc, dt); err != nil {
+	//	log.Fatal(err)
+	//}
 
-	numExamples := inputs.Shape()[0]
+	//numExamples := inputs.Shape()[0]
 	bs := *batchsize
 
 	// MNIST data consists of 28 by 28 black and white images
@@ -212,7 +206,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	numExamples = inputs.Shape()[0]
+	numExamples := inputs.Shape()[0]
 	bs = *batchsize
 
 	batches := numExamples / bs
@@ -226,7 +220,7 @@ func main() {
 	bar = pb.New(batches)
 	bar.SetRefreshRate(time.Second / 20)
 	bar.SetMaxWidth(80)
-	bar.Prefix(fmt.Sprintf("Epoch Test"))
+	bar.Prefix("Epoch Test")
 	bar.Set(0)
 	bar.Start()
 	for b := 0; b < batches; b++ {
@@ -267,7 +261,7 @@ func main() {
 			img := visualizeRow(row)
 
 			f, _ := os.OpenFile(fmt.Sprintf("images/%d - %d input.jpg", b, j), os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-			jpeg.Encode(f, img, &jpeg.Options{jpeg.DefaultQuality})
+			jpeg.Encode(f, img, &jpeg.Options{})
 			f.Close()
 		}
 
@@ -285,7 +279,7 @@ func main() {
 				fmt.Printf("\nError terjadi : %v \n", err)
 			}
 
-			jpeg.Encode(f, img, &jpeg.Options{jpeg.DefaultQuality})
+			jpeg.Encode(f, img, &jpeg.Options{})
 			f.Close()
 		}
 
