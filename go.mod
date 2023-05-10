@@ -1,4 +1,4 @@
-module tugas3
+module github.com/braindecoding/gae
 
 go 1.20
 

@@ -6,10 +6,8 @@ import (
 	"fmt"
 	"image"
 	"image/jpeg"
-	"io/ioutil"
 	"log"
 	"math"
-	"math/rand"
 	"os"
 
 	_ "net/http/pprof"
@@ -24,11 +22,10 @@ import (
 )
 
 var (
-	epochs     = flag.Int("epochs", 5, "Number of epochs to train for")
-	dataset    = flag.String("dataset", "train", "Which dataset to train on? Valid options are \"train\" or \"test\"")
-	dtype      = flag.String("dtype", "float64", "Which dtype to use")
-	batchsize  = flag.Int("batchsize", 100, "Batch size")
-	cpuprofile = flag.String("cpuprofile", "", "CPU profiling")
+	epochs    = flag.Int("epochs", 5, "Number of epochs to train for")
+	dataset   = flag.String("dataset", "train", "Which dataset to train on? Valid options are \"train\" or \"test\"")
+	dtype     = flag.String("dtype", "float64", "Which dtype to use")
+	batchsize = flag.Int("batchsize", 100, "Batch size")
 )
 
 const loc = "./mnist/"
@@ -147,7 +144,6 @@ func visualizeRow(x []float64) *image.Gray {
 func main() {
 	flag.Parse()
 	parseDtype()
-	rand.Seed(7945)
 
 	// // intercept Ctrl+C
 	// sigChan := make(chan os.Signal, 1)
@@ -180,14 +176,14 @@ func main() {
 	x := gorgonia.NewMatrix(g, dt, gorgonia.WithShape(bs, 784), gorgonia.WithName("x"))
 	y := gorgonia.NewMatrix(g, dt, gorgonia.WithShape(bs, 784), gorgonia.WithName("y"))
 
-	ioutil.WriteFile("simple_graph.dot", []byte(g.ToDot()), 0644)
+	os.WriteFile("simple_graph.dot", []byte(g.ToDot()), 0644)
 
 	m := newNN(g)
 	if err = m.fwd(x); err != nil {
 		log.Fatalf("%+v", err)
 	}
 
-	ioutil.WriteFile("simple_graph_2.dot", []byte(g.ToDot()), 0644)
+	os.WriteFile("simple_graph_2.dot", []byte(g.ToDot()), 0644)
 
 	losses, err := gorgonia.Square(gorgonia.Must(gorgonia.Sub(y, m.out)))
 	if err != nil {
@@ -196,7 +192,7 @@ func main() {
 	cost := gorgonia.Must(gorgonia.Mean(losses))
 	// cost = gorgonia.Must(gorgonia.Neg(cost))
 
-	ioutil.WriteFile("simple_graph_3.dot", []byte(g.ToDot()), 0644)
+	os.WriteFile("simple_graph_3.dot", []byte(g.ToDot()), 0644)
 
 	// we wanna track costs
 	var costVal gorgonia.Value
@@ -247,7 +243,7 @@ func main() {
 			// 	log.Fatal("Unable to reshape %v", err)
 			// }
 			if err = xVal.(*tensor.Dense).Reshape(bs, 784); err != nil {
-				log.Fatal("Unable to reshape %v", err)
+				log.Printf("Unable to reshape %v", err)
 			}
 
 			gorgonia.Let(x, xVal)
@@ -266,7 +262,7 @@ func main() {
 				img := visualizeRow(row)
 
 				f, _ := os.OpenFile(fmt.Sprintf("training/%d - %d - %d training.jpg", j, b, i), os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-				jpeg.Encode(f, img, &jpeg.Options{jpeg.DefaultQuality})
+				jpeg.Encode(f, img, &jpeg.Options{})
 				f.Close()
 			}
 
@@ -294,7 +290,7 @@ func main() {
 	bar = pb.New(batches)
 	bar.SetRefreshRate(time.Second / 20)
 	bar.SetMaxWidth(80)
-	bar.Prefix(fmt.Sprintf("Epoch Test"))
+	bar.Prefix("Epoch Test")
 	bar.Set(0)
 	bar.Start()
 	for b := 0; b < batches; b++ {
@@ -319,13 +315,13 @@ func main() {
 		// 	log.Fatal("Unable to reshape %v", err)
 		// }
 		if err = xVal.(*tensor.Dense).Reshape(bs, 784); err != nil {
-			log.Fatal("Unable to reshape %v", err)
+			log.Printf("Unable to reshape %v", err)
 		}
 
 		gorgonia.Let(x, xVal)
 		gorgonia.Let(y, xVal)
 		if err = vm.RunAll(); err != nil {
-			log.Fatalf("Failed at epoch test: %v", err)
+			log.Printf("Failed at epoch test: %v", err)
 		}
 
 		for j := 0; j < xVal.Shape()[0]; j++ {
@@ -335,7 +331,7 @@ func main() {
 			img := visualizeRow(row)
 
 			f, _ := os.OpenFile(fmt.Sprintf("images/%d - %d input.jpg", b, j), os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-			jpeg.Encode(f, img, &jpeg.Options{jpeg.DefaultQuality})
+			jpeg.Encode(f, img, &jpeg.Options{})
 			f.Close()
 		}
 
@@ -353,7 +349,7 @@ func main() {
 				fmt.Printf("\nError terjadi : %v \n", err)
 			}
 
-			jpeg.Encode(f, img, &jpeg.Options{jpeg.DefaultQuality})
+			jpeg.Encode(f, img, &jpeg.Options{})
 			f.Close()
 		}
 

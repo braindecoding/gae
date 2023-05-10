@@ -1,12 +1,9 @@
-package main
+package gae
 
 import (
 	"encoding/gob"
 	"flag"
 	"fmt"
-	"github.com/aiteung/mnist"
-	"github.com/pkg/errors"
-	"gopkg.in/cheggaaa/pb.v1"
 	"image"
 	"image/jpeg"
 	"log"
@@ -14,6 +11,10 @@ import (
 	"math/rand"
 	"os"
 	"time"
+
+	"github.com/aiteung/mnist"
+	"github.com/pkg/errors"
+	"gopkg.in/cheggaaa/pb.v1"
 
 	"gorgonia.org/gorgonia"
 	"gorgonia.org/tensor"
@@ -250,7 +251,7 @@ func main() {
 		// 	log.Fatal("Unable to reshape %v", err)
 		// }
 		if err = xVal.(*tensor.Dense).Reshape(bs, 784); err != nil {
-			log.Fatal("Unable to reshape %v", err)
+			log.Printf("Unable to reshape %v", err)
 		}
 
 		gorgonia.Let(x, xVal)
