@@ -151,32 +151,11 @@ func main() {
 	flag.Parse()
 	parseDtype()
 
-	// // intercept Ctrl+C
-	// sigChan := make(chan os.Signal, 1)
-	// signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
-	// doneChan := make(chan bool, 1)
-
 	var inputs tensor.Tensor
 	var err error
 
-	// load our data set
-	//trainOn := *dataset
-	//if inputs, _, err = mnist.Load(trainOn, loc, dt); err != nil {
-	//	log.Fatal(err)
-	//}
-
-	//numExamples := inputs.Shape()[0]
 	bs := *batchsize
 
-	// MNIST data consists of 28 by 28 black and white images
-	// however we've imported it directly now as 784 different pixels
-	// as a result, we need to reshape it to match what we actually want
-	// if err := inputs.Reshape(numExamples, 1, 28, 28); err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	// we should now also proceed to put in our desired variables
-	// x is where our input should go, while y is the desired output
 	g := gorgonia.NewGraph()
 	// x := gorgonia.NewTensor(g, dt, 4, gorgonia.WithShape(bs, 1, 28, 28), gorgonia.WithName("x"))
 	x := gorgonia.NewMatrix(g, dt, gorgonia.WithShape(bs, 784), gorgonia.WithName("x"))
@@ -238,12 +217,6 @@ func main() {
 			log.Fatal("Unable to slice x")
 		}
 
-		// if yVal, err = inputs.Slice(sli{start, end}); err != nil {
-		// 	log.Fatal("Unable to slice y")
-		// }
-		// if err = xVal.(*tensor.Dense).Reshape(bs, 1, 28, 28); err != nil {
-		// 	log.Fatal("Unable to reshape %v", err)
-		// }
 		if err = xVal.(*tensor.Dense).Reshape(bs, 784); err != nil {
 			log.Printf("Unable to reshape %v", err)
 		}
