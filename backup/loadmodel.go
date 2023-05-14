@@ -27,7 +27,7 @@ var (
 	//cpuprofile = flag.String("cpuprofile", "", "CPU profiling")
 )
 
-const loc = "./mnist/"
+const loc = "../mnist/"
 const backup = "./"
 
 var dt tensor.Dtype
