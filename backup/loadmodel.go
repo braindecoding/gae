@@ -28,7 +28,7 @@ var (
 )
 
 const loc = "./mnist/"
-const backup = "./backup/"
+const backup = "./"
 
 var dt tensor.Dtype
 
